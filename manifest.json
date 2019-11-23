@@ -1,0 +1,19 @@
+{
+    "name":"Export to Markdown",
+    "short_name":"ExportToMarkdown",
+    "description":"导出.",
+    "version":"1.0.0",
+    "icons":{
+        "128":"icons/logo.png"
+    },
+    "permissions":[
+        "tabs"
+    ],
+    "browser_action":{
+        "default_title":"Export to Markdown",
+        "default_icon":"icons/logo.png",
+        "default_popup":"popup.html"
+    },
+    "manifest_version":2,
+    "homepage_url":"https://github.com/jc91715/export-to-markdown"
+}
