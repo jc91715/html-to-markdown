@@ -25,14 +25,10 @@ document.querySelector('.copy').addEventListener('click', function () {
 
 
 function exportHtmlToMarkdown() {
-    let markdownText = ''
-    const parser = new DOMParser()
-    const doc = parser.parseFromString(html_str, 'text/html')
 
     if(document.querySelector('#selector').value){
         localStorage.setItem(domain,document.querySelector('#selector').value)
         handle()
-
     }else{
         if(localStorage.getItem(domain)){
             document.querySelector('#selector').value=localStorage.getItem(domain)
@@ -46,6 +42,9 @@ function exportHtmlToMarkdown() {
 }
 
 function handle() {
+    let markdownText = ''
+    const parser = new DOMParser()
+    const doc = parser.parseFromString(html_str, 'text/html')
     var blog = doc.querySelector(document.querySelector('#selector').value)
     const turndownService = new TurndownService()
     markdownText = turndownService.turndown(blog)
