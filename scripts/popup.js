@@ -10,8 +10,11 @@ window.onload=function(){
 
 
 document.querySelector('.chaxun').addEventListener('click', function () {
-    localStorage.setItem(domain,document.querySelector('#selector').value)
-    exportHtmlToMarkdown()
+    if(document.querySelector('#selector').value){
+        localStorage.setItem(domain,document.querySelector('#selector').value)
+        exportHtmlToMarkdown()
+    }
+
 })
 document.querySelector('.copy').addEventListener('click', function () {
     const el = document.querySelector('#source')
@@ -25,15 +28,26 @@ function exportHtmlToMarkdown() {
     let markdownText = ''
     const parser = new DOMParser()
     const doc = parser.parseFromString(html_str, 'text/html')
-    if(localStorage.getItem(domain)){
-        document.querySelector('#selector').value=localStorage.getItem(domain)
-    }
+
     if(document.querySelector('#selector').value){
-        var blog = doc.querySelector(document.querySelector('#selector').value)
-        const turndownService = new TurndownService()
-        markdownText = turndownService.turndown(blog)
-        document.querySelector('#source').value = markdownText;
+        localStorage.setItem(domain,document.querySelector('#selector').value)
+        handle()
+
+    }else{
+        if(localStorage.getItem(domain)){
+            document.querySelector('#selector').value=localStorage.getItem(domain)
+            handle()
+        }
+
     }
 
 
+
+}
+
+function handle() {
+    var blog = doc.querySelector(document.querySelector('#selector').value)
+    const turndownService = new TurndownService()
+    markdownText = turndownService.turndown(blog)
+    document.querySelector('#source').value = markdownText;
 }
